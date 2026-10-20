@@ -8,6 +8,7 @@ import Palestrante1 from "../assets/palestrante1.jpg";
 import Palestrante2 from "../assets/palestrante2.jpg";
 import Palestrante3 from "../assets/palestrante3.jpg";
 import Palestrante4 from "../assets/palestrante4.jpg";
+import Footer from "../components/Footer";
 
 const palestrantes = [
     { foto: Palestrante4, nome: "Ana Paula Lima", cargo: "Desenvolvedora Full Stack", empresa: "Nubank" },
@@ -69,6 +70,8 @@ function HomePage() {
                     <ButtonRedirect placeholder={"Ver inscritos"} destino={"/inscritos"} />
                 </div>
             </section>
+
+            <Footer />
         </div >
     )
 }
