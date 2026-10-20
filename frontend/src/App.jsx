@@ -1,6 +1,5 @@
 import { BrowserRouter } from "react-router";
 import AppRoutes from "./routes.jsx"
-import Footer from "./components/Footer.jsx";
 
 function App() {
     return (
@@ -9,7 +8,6 @@ function App() {
                 <main className="flex-1">
                     <AppRoutes />
                 </main>
-                <Footer />
             </div>
         </BrowserRouter>
     )
