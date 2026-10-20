@@ -1,10 +1,16 @@
 import { BrowserRouter } from "react-router";
 import AppRoutes from "./routes.jsx"
+import Footer from "./components/Footer.jsx";
 
 function App() {
     return (
         <BrowserRouter>
-            <AppRoutes />
+            <div className="min-h-screen flex flex-col">
+                <main className="flex-1">
+                    <AppRoutes />
+                </main>
+                <Footer />
+            </div>
         </BrowserRouter>
     )
 }
