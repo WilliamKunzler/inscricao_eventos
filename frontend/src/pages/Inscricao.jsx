@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import Footer from "../components/Footer";
 import SelecaoIngresso from "../components/SelecaoIngresso";
 import CardEvento from "../components/CardEvento";
+import { criarInscricao } from "../services/api";
+import { emailValido } from "../utils/emailValido";
 
 const estadoInicial = { nome: "", email: "", telefone: "", ingresso: "" };
 
@@ -23,9 +25,25 @@ function InscricaoPage() {
 
     const atualizarCampo = (campo, valor) => setForm((prev) => ({ ...prev, [campo]: valor }));
 
-    const enviar = (e) => {
+    const enviar = async (e) => {
         e.preventDefault();
         if (!validarCampos()) return;
+        try {
+            await criarInscricao({
+                nome: form.nome.trim(),
+                email: form.email.trim(),
+                telefone: form.telefone || null,
+                tipoIngresso: form.ingresso,
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Não foi possível inscrever",
+                text: error.message === "Failed to fetch" ? "Servidor indisponível." : error.message,
+                confirmButtonColor: "#7e22ce",
+            });
+            return;
+        }
         setEnviado(true)
         setForm(estadoInicial)
         Swal.fire({
@@ -42,6 +60,7 @@ function InscricaoPage() {
 
         if (!form.nome.trim()) novosErros.nome = "Informe seu nome.";
         if (!form.email.trim()) novosErros.email = "Informe seu e-mail.";
+        else if (!emailValido(form.email)) novosErros.email = "E-mail inválido.";
         if (!form.ingresso) novosErros.ingresso = "Selecione o tipo de ingresso.";
 
         setErros(novosErros);

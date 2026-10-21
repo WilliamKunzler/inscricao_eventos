@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ArrowLeft, LayoutGrid, Table } from "lucide-react";
 import Swal from "sweetalert2";
 import Footer from "../components/Footer";
 import CardInscrito from "../components/CardInscrito";
 import TabelaInscritos from "../components/TabelaInscritos";
-
-const inscritosIniciais = [];
+import { listarInscritos, deletarInscricao } from "../services/api";
 
 const filtros = [
     { valor: "todos", rotulo: "Todos" },
@@ -20,9 +19,15 @@ const visualizacoes = [
 ];
 
 function InscritosPage() {
-    const [inscritos, setInscritos] = useState(inscritosIniciais);
+    const [inscritos, setInscritos] = useState([]);
     const [filtro, setFiltro] = useState("todos");
     const [visualizacao, setVisualizacao] = useState("tabela");
+
+    useEffect(() => {
+        listarInscritos()
+            .then(setInscritos)
+            .catch(() => Swal.fire({ icon: "error", title: "Erro ao carregar inscritos", confirmButtonColor: "#7e22ce" }));
+    }, []);
 
     const visiveis = filtro === "todos" ? inscritos : inscritos.filter((i) => i.tipoIngresso === filtro);
 
@@ -38,7 +43,13 @@ function InscritosPage() {
             cancelButtonText: "Cancelar",
             confirmButtonColor: "#dc2626",
         });
-        if (isConfirmed) setInscritos((prev) => prev.filter((i) => i.id !== id));
+        if (!isConfirmed) return;
+        try {
+            await deletarInscricao(id);
+            setInscritos((prev) => prev.filter((i) => i.id !== id));
+        } catch (error) {
+            Swal.fire({ icon: "error", title: "Erro ao excluir", text: error.message, confirmButtonColor: "#7e22ce" });
+        }
     };
 
     return (
