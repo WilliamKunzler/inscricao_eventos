@@ -13,8 +13,7 @@ db.exec(`
     nome TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     telefone TEXT,
-    tipoIngresso TEXT NOT NULL,
-    criadoEm TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    tipoIngresso TEXT NOT NULL
   )
 `)
 
