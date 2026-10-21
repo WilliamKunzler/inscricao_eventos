@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import Footer from "../components/Footer";
 import CardInscrito from "../components/CardInscrito";
 import TabelaInscritos from "../components/TabelaInscritos";
+import SelectCustom from "../components/SelectCustom";
 import { listarInscritos, deletarInscricao } from "../services/api";
 
 const filtros = [
@@ -68,18 +69,11 @@ function InscritosPage() {
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex flex-wrap gap-3">
-                        {filtros.map(({ valor, rotulo }) => (
-                            <button
-                                key={valor}
-                                type="button"
-                                onClick={() => setFiltro(valor)}
-                                className={`rounded-3xl border px-5 py-2 font-semibold cursor-pointer transition-colors ${filtro === valor ? "bg-purple-700 border-purple-700 text-white" : "border-gray-300 text-gray-600 hover:border-purple-700 hover:text-purple-700"}`}
-                            >
-                                {rotulo} ({contar(valor)})
-                            </button>
-                        ))}
-                    </div>
+                    <SelectCustom
+                        valor={filtro}
+                        onChange={setFiltro}
+                        opcoes={filtros.map(({ valor, rotulo }) => ({ valor, rotulo: `${rotulo} (${contar(valor)})` }))}
+                    />
 
                     <div className="flex rounded-xl border border-gray-300 p-1">
                         {visualizacoes.map(({ valor, rotulo, icone: Icone }) => (
