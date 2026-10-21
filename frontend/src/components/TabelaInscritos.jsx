@@ -7,6 +7,7 @@ function TabelaInscritos({ inscritos, onExcluir }) {
             <table className="w-full text-left">
                 <thead className="bg-gray-900 text-sm text-white">
                     <tr>
+                        <th className="px-6 py-3 font-semibold">ID</th>
                         <th className="px-6 py-3 font-semibold">Nome</th>
                         <th className="px-6 py-3 font-semibold">E-mail</th>
                         <th className="px-6 py-3 font-semibold">Telefone</th>
@@ -17,6 +18,7 @@ function TabelaInscritos({ inscritos, onExcluir }) {
                 <tbody>
                     {inscritos.map((inscrito) => (
                         <tr key={inscrito.id} className="odd:bg-white even:bg-purple-50 hover:bg-purple-100 transition-colors">
+                            <td className="px-6 py-4 text-gray-500">#{inscrito.id}</td>
                             <td className="px-6 py-4 font-semibold whitespace-nowrap">{inscrito.nome}</td>
                             <td className="px-6 py-4 text-gray-600">{inscrito.email}</td>
                             <td className="px-6 py-4 text-gray-600 whitespace-nowrap">{inscrito.telefone || "Não informado"}</td>

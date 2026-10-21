@@ -17,15 +17,26 @@ const palestrantes = [
     { foto: Palestrante1, nome: "Bruno Almeida", cargo: "Engenheiro de Software", empresa: "Google" },
 ];
 
+const programacao = [
+    { horario: "09h00", titulo: "Credenciamento e café de boas-vindas", descricao: "Retirada de crachás e networking inicial." },
+    { horario: "10h00", titulo: "Construindo aplicações escaláveis com Full Stack", descricao: "Ana Paula Lima" },
+    { horario: "11h30", titulo: "Design de produto centrado no usuário", descricao: "Rafael Costa" },
+    { horario: "13h00", titulo: "Intervalo para almoço", descricao: "Pausa para almoço e networking." },
+    { horario: "14h30", titulo: "Liderança técnica em times de alta performance", descricao: "Juliana Silva" },
+    { horario: "16h00", titulo: "Engenharia de software em grande escala", descricao: "Bruno Almeida" },
+    { horario: "17h30", titulo: "Encerramento e coffee break", descricao: "Considerações finais e confraternização." },
+];
+
 function HomePage() {
 
     return (
         <div>
             <section className="w-full h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center p-10 md:items-start md:justify-start md:p-0" style={{ backgroundImage: `url(${ImgHero})` }}>
-                <div className="h-full w-full 2xl:w-1/2  flex flex-col items-start justify-center gap-3 text-white md:px-24">
-                    <h1 className="text-[45px] min-[480px]:text-[60px] sm:text-[80px] font-bold leading-none flex flex-wrap">Conexão<span className="text-purple-700">TECH</span></h1>
-                    <p className="text-gray-400">Um encontro para quem acredita no poder da tecnologia e das pessoas para transformar o amanhã.</p>
-                    <div className="flex flex-col min-[500px]:flex-row gap-10 my-12">
+                <div className="h-full w-full 2xl:w-1/2  flex flex-col items-start justify-center gap-4 text-white md:px-24">
+                    <span className="px-4 py-1 rounded-full border border-purple-500/50 bg-purple-700/20 text-purple-200 text-sm font-medium">Evento de tecnologia • 2026</span>
+                    <h1 className="text-[45px] min-[480px]:text-[60px] sm:text-[80px] font-bold leading-none flex flex-wrap">Conexão<span className="text-purple-500 drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]">TECH</span></h1>
+                    <p className="text-gray-300 text-lg max-w-xl">Um encontro para quem acredita no poder da tecnologia e das pessoas para transformar o amanhã.</p>
+                    <div className="flex flex-col min-[500px]:flex-row gap-6 min-[500px]:gap-10 my-8 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                         <Infografico icone={Calendar} titulo={"15 de Novembro"} subtitulo={"Das 9h às 18h"} />
                         <Infografico icone={MapPin} titulo={"São Paulo, SP"} subtitulo={"Centro de Convenções"} />
                     </div>
@@ -58,12 +69,30 @@ function HomePage() {
                 </div>
             </section>
 
+            <section className="px-10 md:px-24 xl:px-36 mb-20 flex flex-col gap-8">
+                <div className="flex flex-col gap-3">
+                    <h1 className="text-3xl font-semibold">Programação</h1>
+                </div>
+                <div className="flex flex-col border-l-2 border-purple-200 ml-2">
+                    {programacao.map((item) => (
+                        <div key={item.horario} className="pl-8 pb-8 last:pb-0">
+                            <div className="relative p-5 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col">
+                                <span className="absolute -left-10.25 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-purple-700 ring-4 ring-purple-100"></span>
+                                <span className="text-sm font-bold text-purple-700">{item.horario}</span>
+                                <h2 className="text-lg font-semibold">{item.titulo}</h2>
+                                <p className="text-gray-500">{item.descricao}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
             <section className="px-10 md:px-24 xl:px-36 mb-20">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 p-8 rounded-2xl bg-gray-900 text-white">
                     <div className="flex items-center gap-4">
                         <UsersRound size={40} strokeWidth={1.5} className="shrink-0" />
                         <div className="flex flex-col">
-                            <h1 className="text-3xl font-semibold">+0 inscritos</h1>
+                            <h1 className="text-3xl font-semibold">Inscritos</h1>
                             <p className="text-gray-400">Veja quem já garantiu presença no evento.</p>
                         </div>
                     </div>
