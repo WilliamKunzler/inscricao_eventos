@@ -2,6 +2,8 @@
 import * as inscricoesRepository from '../repositories/inscricoes.repository.js';
 import { emailValido } from '../utils/emailValido.js';
 
+const TIPOS_INGRESSO = ['profissional', 'estudante'];
+
 export const listarInscritos = async () => {
     const inscritos = await inscricoesRepository.listarInscritos();
     return {
@@ -26,6 +28,13 @@ export const criarInscricao = async (inscricao = {}) => {
         return {
             status: 400,
             message: "Campos inválidos!"
+        }
+    }
+
+    if (!TIPOS_INGRESSO.includes(tipoIngresso)) {
+        return {
+            status: 400,
+            message: "Tipo de ingresso inválido! Use 'profissional' ou 'estudante'."
         }
     }
 
